@@ -1,0 +1,22 @@
+{
+  "name": "learn-jenkins",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/electrifyingaustralia/learn-jenkins.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/electrifyingaustralia/learn-jenkins/issues"
+  },
+  "homepage": "https://github.com/electrifyingaustralia/learn-jenkins#readme"
+}
