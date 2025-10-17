@@ -6,31 +6,8 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest  # GitHub Actions side is Linux (doesn't matter)
+    runs-on: ubuntu-latest
     steps:
-      # 1️⃣ Checkout repository
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      # 2️⃣ Setup Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      # 3️⃣ Install dependencies
-      - name: Install dependencies
-        run: npm ci
-
-      # 4️⃣ Run tests (optional)
-      - name: Run tests
-        run: npm test
-
-      # 5️⃣ Build (optional)
-      - name: Build project
-        run: npm run build --if-present
-
-      # 6️⃣ Deploy to Windows Server via WinRM/PowerShell
       - name: Deploy via SSH
         uses: easingthemes/ssh-deploy@v5.0.0
         env:
