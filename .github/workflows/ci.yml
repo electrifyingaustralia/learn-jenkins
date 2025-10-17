@@ -6,13 +6,36 @@ on:
 
 jobs:
   build-and-deploy:
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Deploy via SSH
+      # 1️⃣ Checkout your repo code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          repository: electrifyingaustralia/learn-jenkins
+          ref: main
+
+      # 2️⃣ Deploy via SSH using rsync
+      - name: Deploy to Windows Server via SSH
         uses: easingthemes/ssh-deploy@v5.0.0
         env:
           SSH_PRIVATE_KEY: ${{ secrets.WINDOWS_SSH_KEY }}
-          ARGS: "-avz --delete"
+          ARGS: "-avzr --delete"
           SOURCE: "./"
           REMOTE_HOST: ${{ secrets.WINDOWS_HOST }}
           REMOTE_USER: ${{ secrets.WINDOWS_USER }}
-          TARGET: "C:/apps/my-node-app"
+          TARGET: "C:/apps/learn-jenkins"
+
+      # 3️⃣ Optional: Restart Node.js app (if running with pm2)
+      - name: Restart Node App via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.WINDOWS_HOST }}
+          username: ${{ secrets.WINDOWS_USER }}
+          key: ${{ secrets.WINDOWS_SSH_KEY }}
+          script: |
+            cd C:\apps\learn-jenkins
+            npm install --production
+            taskkill /IM node.exe /F || echo "No node process found"
+            start /B node src\index.js
