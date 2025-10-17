@@ -31,15 +31,12 @@ jobs:
         run: npm run build --if-present
 
       # 6️⃣ Deploy to Windows Server via WinRM/PowerShell
-      - name: Deploy to Windows Server
-        uses: gsoft-inc/ssh-action@v1  # works with Windows SSH service
-        with:
-          host: ${{ secrets.WINDOWS_HOST }}
-          username: ${{ secrets.WINDOWS_USER }}
-          key: ${{ secrets.WINDOWS_SSH_KEY }}
-          script: |
-            cd C:\apps\my-node-app
-            git pull origin main
-            npm install --production
-            taskkill /IM node.exe /F || echo "No process"
-            start /B node src\index.js
+      - name: Deploy via SSH
+        uses: easingthemes/ssh-deploy@v5.0.0
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.WINDOWS_SSH_KEY }}
+          ARGS: "-avz --delete"
+          SOURCE: "./"
+          REMOTE_HOST: ${{ secrets.WINDOWS_HOST }}
+          REMOTE_USER: ${{ secrets.WINDOWS_USER }}
+          TARGET: "C:/apps/my-node-app"
