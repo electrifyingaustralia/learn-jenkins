@@ -13,6 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Echo Code
+        run: echo "Hello"
+
       - name: Install rsync
         run: sudo apt update && sudo apt install -y rsync
 
