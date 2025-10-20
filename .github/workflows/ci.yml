@@ -34,8 +34,7 @@ jobs:
           host: ${{ secrets.WINDOWS_HOST }}
           username: ${{ secrets.WINDOWS_USER }}
           key: ${{ secrets.WINDOWS_SSH_KEY }}
-          script: |
-            cd C:\apps\learn-jenkins
+          script: cd C:\apps\learn-jenkins
             npm install --production
             taskkill /IM node.exe /F || echo "No node process found"
             start /B node src\index.js
