@@ -12,6 +12,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Echo Show My Name
+        uses: echo "Sourov Pal"
+
       - name: Deploy index.html to Linux Server
         uses: easingthemes/ssh-deploy@v5.0.0
         env:
