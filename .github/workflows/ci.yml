@@ -5,31 +5,16 @@ on:
     branches: [main]
 
 jobs:
-  deploy:
+  testing:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Echo Show My Name
-        run: echo "Sourov Pal"
+  deploy:
+    runs-on: ubuntu-latest
 
-      - name: Deploy index.html to Linux Server
-        uses: easingthemes/ssh-deploy@v5.0.0
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.LINUX_SSH_KEY }}
-          ARGS: "-avzr --delete"
-          SOURCE: "index.html"
-          REMOTE_HOST: ${{ secrets.LINUX_HOST }}
-          REMOTE_USER: ${{ secrets.LINUX_USER }}
-          TARGET: "/var/www/admin.workrobot.com.au/dist/"
-
-      - name: Set up SSH
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.LINUX_SSH_KEY }}
-
-      - name: Git Clone to Remote Server
-        run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.LINUX_USER }}@${{ secrets.LINUX_HOST }} "git clone https://github.com/electrifyingaustralia/test.git /var/www/admin.workrobot.com.au/git-clone/"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
