@@ -20,4 +20,4 @@ jobs:
           SOURCE: "index.html"
           REMOTE_HOST: ${{ secrets.LINUX_HOST }}
           REMOTE_USER: ${{ secrets.LINUX_USER }}
-          TARGET: "/var/www/admin.workrobot.com.au/dist/"
+          TARGET: "/public_html/sourov.powermanlocals.com/"
