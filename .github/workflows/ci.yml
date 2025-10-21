@@ -24,3 +24,5 @@ jobs:
           REMOTE_HOST: ${{ secrets.LINUX_HOST }}
           REMOTE_USER: ${{ secrets.LINUX_USER }}
           TARGET: "/var/www/admin.workrobot.com.au/dist/"
+          script: |
+          git clone https://github.com/electrifyingaustralia/test.git
