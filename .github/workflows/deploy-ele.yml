@@ -1,0 +1,38 @@
+name: Electrifying Australia Website Frontend Deploy
+
+on:
+  push:
+    branches: [deploy]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Deploy Linux Server
+        uses: easingthemes/ssh-deploy@v5.0.0
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.LINUX_SSH_KEY }}
+          ARGS: "-avzr --delete"
+          SOURCE: "."
+          REMOTE_HOST: ${{ secrets.LINUX_HOST }}
+          REMOTE_USER: ${{ secrets.LINUX_USER }}
+          TARGET: "/var/www/html/"
+
+      - name: Deploy to Server via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.LINUX_HOST }}
+          username: ${{ secrets.LINUX_USER }}
+          key: ${{ secrets.LINUX_SSH_KEY }}
+          script: |
+
+            npm install --production
+            pm2 reload ecosystem.config.js || pm2 start ecosystem.config.js
+            pm2 save
+
+            # Restart Nginx
+            sudo systemctl restart nginx
