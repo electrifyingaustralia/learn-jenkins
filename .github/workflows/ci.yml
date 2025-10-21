@@ -32,4 +32,4 @@ jobs:
 
       - name: Git Clone to Remote Server
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.LINUX_USER }}@${{ secrets.LINUX_HOST }} "git clone https://github.com/electrifyingaustralia/test.git /var/www/admin.workrobot.com.au/dist/"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.LINUX_USER }}@${{ secrets.LINUX_HOST }} "git clone https://github.com/electrifyingaustralia/test.git /var/www/admin.workrobot.com.au/git-clone/"
