@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/electrifyingaustralia/learn-jenkins/issues"
   },
-  "homepage": "https://github.com/electrifyingaustralia/learn-jenkins#readme"
+  "homepage": "https://github.com/electrifyingaustralia/learn-jenkins#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
